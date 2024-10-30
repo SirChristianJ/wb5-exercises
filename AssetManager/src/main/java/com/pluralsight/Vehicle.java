@@ -44,18 +44,29 @@ public class Vehicle extends Asset{
         int yearDifference = currentYear-year;
         switch (yearDifference){
             case 0,1,2,3 -> {
-                return (double) super.getOriginalCost() - (0.03 * (currentYear-year));
+                if(odometer<=100000 || getMakeModel().contains("Honda")|| getMakeModel().contains("Toyota"))
+                    return (double) super.getOriginalCost() - (0.03 * (currentYear-year));
+                else if((odometer > 100000 && !getMakeModel().contains("Honda")) || (odometer > 100000 && !getMakeModel().contains("Toyota")))
+                    return (double) (super.getOriginalCost() - (0.03 * (currentYear-year))) - (super.getOriginalCost() * .25);
                 }
             case 4,5,6 -> {
-                return (double) super.getOriginalCost() - (0.06 * (currentYear-year));
+                if(odometer<=100000 || getMakeModel().contains("Honda")|| getMakeModel().contains("Toyota"))
+                    return (double) super.getOriginalCost() - (0.06 * (currentYear-year));
+                else if((odometer > 100000 && !getMakeModel().contains("Honda")) || (odometer > 100000 && !getMakeModel().contains("Toyota")))
+                    return (double) (super.getOriginalCost() - (0.06 * (currentYear-year))) - (super.getOriginalCost() * .25);
+
             }
             case 7,8,9,10 -> {
-                return (double) super.getOriginalCost() - (0.08 * (currentYear-year));
+                if(odometer<=100000 || getMakeModel().equalsIgnoreCase("Honda")|| getMakeModel().equalsIgnoreCase("Toyota"))
+                    return (double) super.getOriginalCost() - (0.08 * (currentYear-year));
+                else if((odometer > 100000 && !getMakeModel().equalsIgnoreCase("Honda")) || (odometer > 100000 && !getMakeModel().equalsIgnoreCase("Toyota")))
+                    return (double) (super.getOriginalCost() - (0.08 * (currentYear-year))) - (super.getOriginalCost() * .25);
+
             }
             default -> {
                 return (double) 1000;
             }
-
         }
+        return 0;
     }
 }
