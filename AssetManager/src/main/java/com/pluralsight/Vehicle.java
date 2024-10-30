@@ -38,35 +38,32 @@ public class Vehicle extends Asset{
         this.odometer = odometer;
     }
 
+    public double returnWorthBasedOnMileageAndYear(double rateApplied, int currentYear){
+        if(odometer<=100000 || getMakeModel().contains("Honda")|| getMakeModel().contains("Toyota"))
+            return (double) super.getOriginalCost() - (rateApplied * (currentYear-year));
+        else if((odometer > 100000 && !getMakeModel().contains("Honda")) || (odometer > 100000 && !getMakeModel().contains("Toyota")))
+            return (double) (super.getOriginalCost() - (rateApplied * (currentYear-year))) - (super.getOriginalCost() * .25);
+
+        return 0;
+    }
+
     @Override
     public double getValue() {
         int currentYear = LocalDateTime.now().getYear();
         int yearDifference = currentYear-year;
         switch (yearDifference){
             case 0,1,2,3 -> {
-                if(odometer<=100000 || getMakeModel().contains("Honda")|| getMakeModel().contains("Toyota"))
-                    return (double) super.getOriginalCost() - (0.03 * (currentYear-year));
-                else if((odometer > 100000 && !getMakeModel().contains("Honda")) || (odometer > 100000 && !getMakeModel().contains("Toyota")))
-                    return (double) (super.getOriginalCost() - (0.03 * (currentYear-year))) - (super.getOriginalCost() * .25);
-                }
+                return returnWorthBasedOnMileageAndYear(0.03, currentYear);
+            }
             case 4,5,6 -> {
-                if(odometer<=100000 || getMakeModel().contains("Honda")|| getMakeModel().contains("Toyota"))
-                    return (double) super.getOriginalCost() - (0.06 * (currentYear-year));
-                else if((odometer > 100000 && !getMakeModel().contains("Honda")) || (odometer > 100000 && !getMakeModel().contains("Toyota")))
-                    return (double) (super.getOriginalCost() - (0.06 * (currentYear-year))) - (super.getOriginalCost() * .25);
-
+                return returnWorthBasedOnMileageAndYear(0.06, currentYear);
             }
             case 7,8,9,10 -> {
-                if(odometer<=100000 || getMakeModel().equalsIgnoreCase("Honda")|| getMakeModel().equalsIgnoreCase("Toyota"))
-                    return (double) super.getOriginalCost() - (0.08 * (currentYear-year));
-                else if((odometer > 100000 && !getMakeModel().equalsIgnoreCase("Honda")) || (odometer > 100000 && !getMakeModel().equalsIgnoreCase("Toyota")))
-                    return (double) (super.getOriginalCost() - (0.08 * (currentYear-year))) - (super.getOriginalCost() * .25);
-
+                return returnWorthBasedOnMileageAndYear(0.08, currentYear);
             }
             default -> {
                 return (double) 1000;
             }
         }
-        return 0;
     }
 }
