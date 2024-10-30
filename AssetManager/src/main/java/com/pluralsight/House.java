@@ -50,19 +50,19 @@ public class House extends Asset{
     public double getValue() {
         switch (condition){
             case 1 -> {
-                return (double) (80*squareFoot) + (.25 * lotSize);
-            }
-            case 2 -> {
-                return (double) (90*squareFoot) + (.25 * lotSize);
-            }
-            case 3 -> {
-                return (double) (130*squareFoot) + (.25 * lotSize);
-            }
-            case 4 -> {
                 return (double) (180*squareFoot) + (.25 * lotSize);
             }
+            case 2 -> {
+                return (double) (130*squareFoot) + (.25 * lotSize);
+            }
+            case 3 -> {
+                return (double) (90*squareFoot) + (.25 * lotSize);
+            }
+            case 4 -> {
+                return (double) (80*squareFoot) + (.25 * lotSize);
+            }
             default -> {
-                System.out.println("Must enter 1 (poor), 2 (fair), 3 (good), or 4 (excellent) for a condition.\n");
+                System.out.println("Must enter 4 (poor), 3 (fair), 2(good), or 1(excellent) for a condition.\n");
             }
         }
         return 0;

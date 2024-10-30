@@ -44,13 +44,13 @@ public class Vehicle extends Asset{
         int yearDifference = currentYear-year;
         switch (yearDifference){
             case 0,1,2,3 -> {
-                return (double) super.getValue() - (0.03 * (currentYear-year));
+                return (double) super.getOriginalCost() - (0.03 * (currentYear-year));
                 }
             case 4,5,6 -> {
-                return (double) super.getValue() - (0.06 * (currentYear-year));
+                return (double) super.getOriginalCost() - (0.06 * (currentYear-year));
             }
             case 7,8,9,10 -> {
-                return (double) super.getValue() - (0.08 * (currentYear-year));
+                return (double) super.getOriginalCost() - (0.08 * (currentYear-year));
             }
             default -> {
                 return (double) 1000;
