@@ -44,7 +44,7 @@ public class Vehicle extends Asset{
         int yearDifference = currentYear-year;
         switch (yearDifference){
             case 0,1,2,3 -> {
-                    return (double) super.getValue() - (0.03 * (currentYear-year));
+                return (double) super.getValue() - (0.03 * (currentYear-year));
                 }
             case 4,5,6 -> {
                 return (double) super.getValue() - (0.06 * (currentYear-year));
@@ -55,6 +55,7 @@ public class Vehicle extends Asset{
             default -> {
                 return (double) 1000;
             }
+
         }
     }
 }
